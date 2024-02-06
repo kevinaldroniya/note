@@ -118,3 +118,98 @@ Map Interface
         - result :
             Gratis
             Paid
+
+    - Immutable Map
+        - Collections.emptyMap()
+        - Collections.unmodifiableMap(map)
+        - Collections.singletonMap(key, value)
+        - Map.of(...)
+
+    - SortedMap
+        - SortedMap adalah implementasi Map dengan data key diurutkan sesuai dengan Comparable key ayau bisa menggunakan Comparator
+        - SortedMap cocok untuk kasus yang posisi key pada Map harus berurut
+
+        - implementasi SortedMap
+            - Map
+                - SortedMap
+                    - TreeMap (Class)
+
+        - Code : SortedMap
+
+            Comparator<String> stringComparator = new Comparator<String>(){
+                @Override
+                public int compare(String o1, String o2){
+                    return o2.compareTo(o1);
+                }
+            }
+
+            SortedMap<String, String> map = new TreeMap<>(stringComparator);
+            map.put("Gojo","Gojo");
+            map.put("Satoru","Satoru");
+            map.put("Strongest","Strongest");
+
+            for(var key : map.entrySet()){
+                System.out.println(key);
+            }
+
+        - result :
+
+            Strongest
+            Satoru
+            Gojo
+
+        - Immutable SortedMap
+            - Collections.emptySortedMap()
+            - Collection.unmodifiableSortedMap(map)
+
+    - NavigableMap
+        - NavigableMap adalah turunan dari SortedMap
+        - namun NavigableMap memiliki kemampuan navigasi berdasarkan operasi kurang dari lebih dari dan sejenisnya
+        - misal kita ingin mengambil data yang lebih dari key x atau kurang dari key y, ini bisa dilakukan di NavigableMap
+
+
+        - implementasi NavigableMap
+            -Map
+                -SortedMap
+                    -NavigableMap
+                        -TreeMap
+
+        - Code : NavigableMap
+
+            NavigableMap<String, String> map =  new TreeMap<>();
+
+            map.put("Gojo","Gojo");
+            map.put("Amaterasu","Amaterasu");
+            map.put("Strongest","Strongest");
+
+            System.out.println(map.lowerKey("Gojo"));
+            System.out.println(map.higherKey("Gojo"));
+
+        - result : 
+
+            Amaterasu
+            Strongest
+
+        - Immutable NavigableMap
+            - Collections.emptyNavigableMap()
+            - Collections.unmodifiableNavigableMap(map)
+
+    - Entry-Map
+        - saat kita menyimpan data di Map, data disimpan dalam pair(key-value)
+        - di java collection, implementasi Pair di Map bernama Entry
+        - Entry adalah Interface sederhana yang berisikan method untuk mengambil key dan value
+
+        Code : Entry
+
+            Map<String, String> map = new HashMap<>();
+            map.put("Gojo","Gojo");
+            map.put("Geto","Geto");
+            map.put("Shoko","Shoko");
+
+            Set<Map.Entry<String, String>> entries = map.entrySet();
+
+            for(var entry : entries){
+                System.out.println("===");
+                System.out.println("Key :"+entry.getKey());
+                System.out.println("Value :"+entry.getValue());
+            }
