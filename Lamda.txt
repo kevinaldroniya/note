@@ -1,0 +1,34 @@
+Lambda
+    - Lambda di java -> Anonymous Class
+    - Syarat Lambda
+        - berupa interface
+        - memiliki 1 method abstract
+        - ditambahkan annotation @FunctionalInterface di interfacenya
+
+    - Code : Lambda interface
+        
+        @FunctionalInterface
+        public interface SimpleAction{
+            String action(String name);
+        }
+
+
+        - with Anonymous CLass
+
+            SimpleAction simpleAction1 =  new SimpleAction(){
+                @Override
+                public String action(){
+                    return "Astra";
+                }
+            }
+
+            System.out.println(simpleAction1.action());
+
+
+        - with Lambda
+
+            SimpleAction simpleAction2 = (name) -> {
+                return "Hello "+name;
+            }
+
+            System.out.println(simpleAction2.action());

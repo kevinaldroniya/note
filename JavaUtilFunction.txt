@@ -1,0 +1,2 @@
+JavaUtilFunction
+    - dengan menggunakan interface-interface yang ada di package ini, kita mungkin tidak lagi membuat FunctionalInterface secara manual

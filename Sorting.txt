@@ -1,0 +1,6 @@
+Sorting
+    - yang bisa di Sorting hanyalah List, karena Set, Queue, Deque, dan Map cara kerjanya khusus, jadi pengurutan hanya bisa di List, dan listnya harus mutable
+
+    - Sorting di List
+        - Collections.sort(list)
+        - Collections.sort(list, comparatot)

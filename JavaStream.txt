@@ -1,0 +1,115 @@
+Stream
+    - Stream adalah kumpulan ditambahkan
+    - berbeda dengan array atau collection yang merupakan kumpulan data
+
+    - class Stream merupakan Generic Class, sehingga kita bisa membuat aliran data dengan tipe yang diinginkan
+
+
+    membuat Stream :
+        mvn archetype:generate -> maven-archetype-quickstart
+
+        + j-uni jupiter ke pom, scope diganti test
+
+    Stream Kosong 
+        Stream <String> emptyStream =  Stream.empty();
+
+    Single Stream
+        Stream <String> oneStream = Stream.of("Astra");
+
+    Null Stream
+        String data = null;
+        Stream <String> nullStream = Stream.ofNullable(data);
+
+    Membuat Stream dari Array
+        Stream<String> streamString = Stream.of("Astra","Jett","Kj");
+        Stream<Strin> streamArray = Arrays.stream(new String[]{"Astra","Jett","Kj"});
+
+    - Stream Builder
+        Stream.Builder<String> builder = Stream.builder();
+        builder.accept("Gojo");
+        builder.add("Geto).add("Suguru");
+
+        Stream<String> stream = builder.build();
+        stream.forEach(System.out::println); 
+
+    - Stream Operations
+        - Stream Operations adalah kumpulan operasi-operasi yang bisa kita gunakan untuk memanipulasi Stream itu sendiri
+        - ada banyak jenis-jenis Stream Operations, secara garis besar Stream Operations tidak akan memodifikasi data aslinya, melainkan hasil dari Stream Operations adalah sebuah Stream baru.
+        
+        Code : Stream Operations
+            ex :
+                List<String> names =  List.of("Gojo","Geto","Shoko");
+                Stream<String> streamNames = names.stream();
+                Stream<String> streamUpper = streamNames.map(name -> name,toUpperCase());
+                streamUpper.forEach(System.out::println);
+                names.forEach(System.out::println);
+
+    - Stream Pipeline
+        - Stream Pipeline terdiri dari sebuah sumber stream(biasanya array, collection, dan lain-lain), lalu diikuti dengan kosong atau lebih stream Operations dan diakhiri dengan operasi akhir misalnya forEach
+        - saat menggunakan stream, hampir kebanyakan kita pasti akan membuat sebuah stream Pipeline
+
+        Code : Stream Pipeline
+            List.of("Gojo","Geto","Shoko").stream()
+                .map(name -> name.toUpperCase())
+                .map(upper -> "Mr " + upper)
+                .forEach(mr -> System.out.println(mr));
+
+    - Lazy-Evaluation
+        - secara garis besar, ada 2 jenis Stream Operation, yaitu Intermediate dan Terminal Operations
+        - Intermediate Operations merupakan lazy operation, dimana Stream tidak akan dieksekusi sampai memang dibutuhkan (ex : map())
+        - sedangkan terminal operation merupakan operasi yang mentrigger sebuah Stream berjalan (ex : forEach())
+        - karena Intermediate Operations, adalah lazy, maka secara garis besar, semua Intermediate Operations akan mengembalikan stream
+
+        Code : 
+
+            List<String> names = List.of("Gojo","Geto","Shoko");
+            names.stream()
+                .map(name -> {
+                    System.out.println("Change "+name+" to UPPERCASE");
+                    return name.toUpperCase();
+                })
+                .forEach(upper ->{
+                    System.out.println(upper);
+                });
+
+        Result :
+            Change Gojo to UPPERCASE
+            GOJO
+            Change Geto to UPPERCASE
+            GETO
+            Change Shoko to UPPERCASE
+            SHOKO
+
+    - Transformation Operations
+        - Transformation Operation adalah operasi yang digunakan untuk membentuk stream
+        - ada banyak function yang bisa digunakan untuk mengubah bentuk stream menjadi stream baru, contohnya map dan flatMap
+
+        Method Transformation Operation
+            - map(T->U)
+            - flatMap(T->Stream<U>)
+
+        Code :
+            - Map
+                List.of("Gojo","Geto","Shoko").stream()
+                    .map(name -> name.toUpperCase())
+                    .map(upperName -> upperName.length())
+                    .forEach(length -> System.out.println(length));
+
+            - flatMap
+                List.of("Gojo","Geto","Shoko").stream()
+                    .map(name -> name.toUpperCase())
+                    .flatMap(upperName -> Stream.of(upperName, upperName.length()))
+                    .forEach(value -> System.out.println(value));
+
+    - Filtering Operations
+        Method Filtering Operations
+            - filter(U -> Boolean)
+            - distinct()
+
+        Code :
+
+            List<String> names = List.of("Gojo","Geto","Shoko"Geto");
+            names.stream().filter(name-> name.length() > 4).forEach(System.out::println);
+            names.stream().distinct().forEach(System.out::println);
+
+

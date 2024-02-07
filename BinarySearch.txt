@@ -1,0 +1,4 @@
+BinarySearch
+    - BinarySearch di List
+        -Collections.binarySearch(list, value)
+        -Collections.binarySearch(list, value, comparator)
