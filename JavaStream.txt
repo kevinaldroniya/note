@@ -108,8 +108,115 @@ Stream
 
         Code :
 
-            List<String> names = List.of("Gojo","Geto","Shoko"Geto");
+            List<String> names = List.of("Gojo","Geto","Shoko");
             names.stream().filter(name-> name.length() > 4).forEach(System.out::println);
             names.stream().distinct().forEach(System.out::println);
 
 
+    - Retrieving Operations
+        - Retrieving Operations adalah operasi stream untuk pengambilan sebagian data
+        - secara garis besar, cara kerjanya hampir mirip dengan Filtering
+
+        - Method Retrieving Operations
+            - limit(n) -> mengambil sejumlah (n) data
+            - skip(n) -> menghiraukan sejumlah (n) data
+            - takeWhile(T -> Boolean) -> mengambil data selama kondisi true
+            - dropWhile(T -> Boolean) -> menghiraukan data selama kondisi true
+
+
+        - Code : 
+            List<String> names = List.of("Ai","Gojo","Geto","Shoko","Yui","Megumi");
+            names.stream().limit(2).forEach(System.out::println);
+            names.stream().skip(2).forEach(System.out::println);
+            names.stream().takeWhile(name-> name.length() != 4).forEach(System.out::println);
+            names.stream().dropWhile(name->name.length()<4).forEach(System.out::println);
+
+        - Result :
+            - Ai, Gojo
+            - Geto, Shoko, Yui, Megumi
+            - Ai
+            - Gojo, Geto, Shoko
+
+        - Retrieving Single Element
+            - stream juga memiliki kemampuan untuk mengambil satu element saja
+            - namun operasi jenis ini merupakan operasi terminal, sehingga akan secara otomatis menjalankan aliran data di Stream
+
+            - Method Retrieving Single Element
+                - findAny() -> mengambil random satu element
+                - findFirst() -> mengambil element pertama
+
+            - Code :
+                List<String> names =  List.of("Frieren","Fern,"Stark","Himmel");
+                Optional<String>anyName = names.stream().findAny()
+                anyName.ifPresent(name->{
+                    System.out.println(name)
+                });
+
+                Optional<String>firstName = names.stream().findFirst();
+                firstName.ifPresent(name ->{
+                    System.out.println(name)
+                });
+
+            - Result :
+                - Random name from names
+                - Frieren
+
+    - Ordering Operations
+        - Java Stream juga mendukung operasi untuk melakukan pengurutan data Streamnya
+        - Secara default, data akan diurutkan mengikuti Comparable yang terdapat di data yang ada di Stream
+        - jika kita ingin mengurutkan data secara manual, kita bisa menggunakan Comparator sendiri
+
+        - Method Ordering Operations
+            - sorted() -> mengurutkan berdasarkan Comparable data
+            - sorted(Comparator) -> mengurutkan berdasarkan Comparator
+
+        - Code :
+            List<String> names =  List.of("Frieren","Ayaka","Xiao,"Hu");
+            names.stream.sorted().forEach(System.out::println);
+            names.stream.sorted(Comparator.reverseOrder()).forEach(System.out::println);
+
+
+
+    - Aggregate Operations
+        - Java Stream mendukung banyak operasi untuk melakukan proses Aggregate
+        - seperti menghitung jumlah data, menghitung data max dan min
+
+        - Method Aggregate Operations
+            - max(Comparator)
+            - min(Comparator)
+            - count
+
+        - Code
+            List<String> names =  List.of("Hu","Xiao","Ayaka","Xiangling","Ei");
+
+            Optional<String> max =  names.stream().max(Comparator,naturalOrder());
+            max.ifPresent(System.out::println);
+
+            Optional<String> min =  names.stream().min(Comparator, naturalOrder());
+            min.ifPresent(System.out::println);
+
+            Long count = names.stream().count();
+            System.out.println(count);
+
+        - Result
+            - Xiao
+            - Ayaka
+            - 5
+        
+        - Manual Aggregate menggunakan Reduce
+            -java stream menyediakan sebuah operasi yang bernama Reduce
+            -reduce bisa digunakan untuk melakukan proses aggregate secara manual
+            -misal kita ingin mnejumlahkan seluruh angka yang terdapat di stream, kita bisa melakukan ini menggunakan reduce operator
+            - di bahasa pemrograman lain, reduce mirip seperti operasi fold
+
+        - Code :
+            List<Integer> numbers = List.of(1,2,3,4,5);
+            Integer sum =  numbers.stream().reduce(0,(result, item) -> result + item);
+            System.out.println(sum);
+
+            Integer factorial =  numbers.stream().reduce(1, (result, item) -> result * item);
+            System.out.println(factorial);
+
+        - Result :
+            - 15
+            - 120
