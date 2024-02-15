@@ -1,0 +1,42 @@
+- Queue Interface
+    - queue adalah implementasi dari struktur data antrian (FIFO)
+
+    - queue method
+        -add(e), jika kita memberikan value untuk queuenya dan apabila full, maka akan throw exception illegalargumenexception
+        -offer(e), jika data sudah penug maka akan return false
+        -remove(), akan mengambil data pertama dan mengeluarkan, apabila data sudah kososng maka akan throw NoSuchElementException
+        -poll(), mengambil data pertama, jika data sudah kosong maka akan return null
+        -element(), mengambil data pertama, tapi tidak menghapus, apabila data kosong throw NoSuchElementException
+        -peek(), mengambil data pertama, tidak menghapus, apabila data kosong return null
+
+        implementasi queue
+        - Iterable
+            - Collection
+                - Queue
+                    -Deque
+                        -LinkedList(Class)
+                        -ArrayDeque(Class)
+                    -PriorityQueue(Class)
+
+        ArrayDeque vs LinkedList vs PriorityQueue
+            - ArrayDeque, menggunakan array sebagai implementasi queuenya, sehingga memiliki batas maksimal
+            - LinkedList, menggunakan double linked list sebagai implementasi queue nya
+            - PriorityQueue, menggunakan array sebagai implementasi queuenya, namun diurutkan menggunakan Comparable atau Comparator
+
+
+        ex : 
+
+            Queue<String> queue = new ArrayDeque<>(10);
+            Queue<String> queue = new PriorityQueue<>(10);
+            Queue<String> queue = new LinkedList<>(10);
+            queue.offer("Gojo");
+            queue.offer("Geto");
+            queue.offer("Shoko");
+
+            for(String next =  queue.poll; next != null; next = queue.poll()){
+                System.out.println(next);
+            }
+
+            System.out.println(queue.size());
+
+

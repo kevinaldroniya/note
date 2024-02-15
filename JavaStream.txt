@@ -220,3 +220,21 @@ Stream
         - Result :
             - 15
             - 120
+
+    - Collect Operations
+        -stream memiliki sebuah operator bernama collect(Collector), function ini biasanya digunakan untuk meng-collect data Stream dan kita ubah menjadi struktur data yang kita inginkan, biasanya kebanyakandeveloper menggunakan operator collect() untuk mengubah stream menjadi collection
+
+        - Collectors
+            -Collectors adalah class helper yang bisa digunakan untuk membuat Collector
+            -ini memper,udah kita ketika ingin melakukan operasi collect terhadap sebuah stream
+            -ada banyak sekali static method yang terdapat di class Collectors
+
+        - Code : example
+            List<String> names =  List.of("Gojo","Yuji","Yuta","Nanami");
+
+            Set<String> set = names.stream.collect(Collectors.toSet());
+            Set<String> immutableSet =  names.stream().collect(Collectors.toUnmodifiableSet());
+
+            List<String> list =  names.stream().collect(Collectors.toLIst());
+            List<String> immutableList = names.stream().collect(Collectors.toLIst());
+

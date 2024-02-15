@@ -1,0 +1,31 @@
+Thread
+    - di java implementasi Concurrency dan Parallel dapat menggunakan Thread
+    - Thread direpresentasikan oleh class bernama Thread di package java.lang
+
+    - Thread Utama
+        - secara default, saat sebuah aplikasi java berjalan, minimal akan ada satu thread yang berjalan
+        - dalam aplikasi java biasa, biasanya kode program kita akan berjalan di dalam thread yang bernama main
+        - bahkan di unit test pun, memiliki thread sendiri
+
+        - cara melihat thread yang sedang digunakan atau running
+            String threadName = Thread.currentThread().getName();
+            System.out.println(threadName);
+
+
+    - Membuat Thread
+        - Thread merupakan proses ringan, membuat Thread bukan berarti kita melakukan pekerjaan
+        - untuk membuat pekerjaan, kita perlu membuat object dari interface Runnable, selanjutnya object Runnable tersebut bisa kita berikan ke thread untuk dijalankan
+        - saat Thread berjalan, dia akan berjalan secara asynchronous, artinya dia akan berjalan sendiri, dan kode program kita akan berlanjut ke kode program selanjutnya
+        - untuk menjalankan thread, kita bisa memanggil function start() milik Thread  
+
+        - Code :
+            Runnable runnable = () -> {
+                System.out.println("Hello from thread: "+Thread.currentThread().getName());
+            };
+
+            var thread =  new Thread(runnable);
+            thread.start();
+        
+    - Thread Sleep
+        - pada saat proses development, kadang kita butuh melakukan simulasi proses yang berjalan dalam waktu tertentu
+        - untuk melakukan hal ini, kita bisa memanfaatkan fitur Thread Sleep yang terdapat di java
