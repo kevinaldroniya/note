@@ -1,0 +1,39 @@
+Java Collection
+    semua Collection di java memiliki kontrak interface, sehingga kita bisa membuat implementasinya sendiri
+
+    - Iterable
+        - Collection
+            - Set
+                - Sorted Set
+                    - Navigable Set
+            - List
+            - Queue
+                - Deque
+                    - Blocking Deque
+                - Blocking Queue
+                    - Blocking Deque
+                    - Transfer Queue
+
+
+    - Map
+        - Sorted Map
+            - Navigable Map
+            - ConcurrentNavigableMap
+        - Concurrent Map
+            - ConcurrentNavigableMap
+
+
+    Iterable mirip seperti array, berisi kumpulan data
+
+    Map itu adalah key dan value
+
+    - Iterable & Iterator
+        - Iterable adalah parent dari semua collection di java, kecuali Map
+        - Iterable hanya digunakan agar mendukung for-each loop
+        - semua collection pasti implement Iterable, secara otomatis semua collection di java mendukung foreach
+
+        ex : 
+            Iterable<String> names = List.of("A","B","C");
+            for(var name:names){
+                System.out.println(name);
+            }
